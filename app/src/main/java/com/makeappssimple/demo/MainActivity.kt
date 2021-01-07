@@ -1,34 +1,33 @@
 package com.makeappssimple.demo
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.makeappssimple.demo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private val activityViewModel by viewModels<MainActivityViewModel>()
-    lateinit var textview: TextView
+    private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewBinding.lifecycleOwner = this
 
-        textview = findViewById(R.id.textview_count)
-
-        findViewById<Button>(R.id.button_increment).setOnClickListener {
+        viewBinding.buttonIncrement.setOnClickListener {
 
             activityViewModel.increment()
         }
 
-        findViewById<Button>(R.id.button_decrement).setOnClickListener {
+        viewBinding.buttonDecrement.setOnClickListener {
 
             activityViewModel.decrement()
         }
 
         activityViewModel.count.observe(this, {
-            textview.text = it.toString()
+            viewBinding.textviewCount.text = it.toString()
         })
     }
 }
