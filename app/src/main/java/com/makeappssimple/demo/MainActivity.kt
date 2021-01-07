@@ -20,13 +20,15 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button_increment).setOnClickListener {
 
             activityViewModel.increment()
-            textview.text = activityViewModel.count.toString()
         }
 
         findViewById<Button>(R.id.button_decrement).setOnClickListener {
-            
+
             activityViewModel.decrement()
-            textview.text = activityViewModel.count.toString()
         }
+
+        activityViewModel.count.observe(this, {
+            textview.text = it.toString()
+        })
     }
 }
