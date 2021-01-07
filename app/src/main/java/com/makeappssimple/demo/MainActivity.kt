@@ -3,11 +3,12 @@ package com.makeappssimple.demo
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var count = 0
+    private val activityViewModel by viewModels<MainActivityViewModel>()
     lateinit var textview: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,13 +18,13 @@ class MainActivity : AppCompatActivity() {
         textview = findViewById(R.id.textview_count)
 
         findViewById<Button>(R.id.button_increment).setOnClickListener {
-            count++
-            textview.text = count.toString()
+            activityViewModel.increment()
+            textview.text = activityViewModel.count.toString()
         }
 
         findViewById<Button>(R.id.button_decrement).setOnClickListener {
-            count--
-            textview.text = count.toString()
+            activityViewModel.decrement()
+            textview.text = activityViewModel.count.toString()
         }
     }
 }
