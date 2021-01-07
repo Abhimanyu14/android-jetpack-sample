@@ -18,11 +18,13 @@ class MainActivity : AppCompatActivity() {
         textview = findViewById(R.id.textview_count)
 
         findViewById<Button>(R.id.button_increment).setOnClickListener {
+
             activityViewModel.increment()
             textview.text = activityViewModel.count.toString()
         }
 
         findViewById<Button>(R.id.button_decrement).setOnClickListener {
+            
             activityViewModel.decrement()
             textview.text = activityViewModel.count.toString()
         }
