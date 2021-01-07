@@ -15,16 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewBinding.lifecycleOwner = this
-
-        viewBinding.buttonIncrement.setOnClickListener {
-
-            activityViewModel.increment()
-        }
-
-        viewBinding.buttonDecrement.setOnClickListener {
-
-            activityViewModel.decrement()
-        }
+        viewBinding.model = activityViewModel
 
         activityViewModel.count.observe(this, {
             viewBinding.textviewCount.text = it.toString()
